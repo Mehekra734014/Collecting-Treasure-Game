@@ -154,12 +154,6 @@ function createBar(){
   }
 }
 
-
-
-
-
-
-
 function createSword(){
   if (World.frameCount % 150 == 0) {
   var sword = createSprite(Math.round(random(50, 350),40, 10, 10));
