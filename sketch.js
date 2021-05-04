@@ -6,6 +6,7 @@ var play = 1;
 var end = 0;
 var gameState = play;
 var go;
+var barI;
 
 function preload(){
   pathImg = loadImage("Road.png");
@@ -15,6 +16,7 @@ function preload(){
   jwelleryImg = loadImage("jwell.png");
   swordImg = loadImage("sword.png");
   endImg =loadAnimation("go.png");
+  barI = loadImage("b2.png");
 }
 
 function setup(){
@@ -39,6 +41,7 @@ cashG=new Group();
 diamondsG=new Group();
 jwelleryG=new Group();
 swordGroup=new Group();
+barGroup=newGroup();
 
 boy.setCollider("circle",0,0,600);
 
@@ -62,6 +65,7 @@ function draw() {
     createDiamonds();
     createJwellery();
     createSword();
+    createBar();
 
     if (cashG.isTouching(boy)) {
       cashG.destroyEach();
@@ -81,6 +85,10 @@ function draw() {
         gameState = end;
         boy.addAnimation("gameover",endImg);
     }
+      else if(barGroup.isTouching(boy)) {
+        barGroup.destroyEach();
+        gameState = end;
+        boy.addAnimation("gameover",endImg);
   }
   }
   else if(gameState === end){
@@ -134,6 +142,23 @@ function createJwellery() {
   jwelleryG.add(jwellery);
   }
 }
+
+function createBar(){
+  if (World.frameCount % 150 == 0) {
+  var bar = createSprite(Math.round(random(50, 300),40, 10, 10));
+  bar.addImage(barImg);
+  bar.scale=0.08;
+  bar.velocityY = 3;
+  bar.lifetime = 150;
+  barGroup.add(bar);
+  }
+}
+
+
+
+
+
+
 
 function createSword(){
   if (World.frameCount % 150 == 0) {
